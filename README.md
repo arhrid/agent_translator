@@ -40,6 +40,32 @@ Custom LibreTranslate URL:
 python translator.py -u https://translate.astian.org "buenas noches"
 ```
 
+### Local LibreTranslate (free for <200 words)
+
+Run locally via Docker:
+
+```bash
+docker run -p 5000:5000 libretranslate/libretranslate
+```
+
+By default, short texts (≤200 words) will prefer the local server at `http://localhost:5000` if reachable. You can control this behavior:
+
+```bash
+# Use local for short texts (default)
+python translator.py "hola mundo"
+
+# Disable local preference
+python translator.py --no-local-short "hola mundo"
+
+# Change local URL or threshold
+python translator.py --local-url http://127.0.0.1:5000 --short-threshold 150 "hola mundo"
+
+# Environment variables
+export LT_LOCAL_URL=http://localhost:5000
+export LT_LOCAL_SHORT_THRESHOLD=200
+export LT_DISABLE_LOCAL_SHORT=0  # set to 1 to disable
+```
+
 
 ## Contributing
 
